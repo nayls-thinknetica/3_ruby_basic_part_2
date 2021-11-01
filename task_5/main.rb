@@ -6,16 +6,16 @@
 # Введите числом год: 2021
 # Год был не високосный: 305
 
-user_input = Hash.new
+user_input = {}
 
 print 'Введите числом день: '
-user_input['day'] = Integer(gets.chomp)
+user_input['day'] = gets.chomp.to_i
 
 print 'Введите числом месяц: '
-user_input['month'] = Integer(gets.chomp)
+user_input['month'] = gets.chomp.to_i
 
 print 'Введите числом год: '
-user_input['year'] = Integer(gets.chomp)
+user_input['year'] = gets.chomp.to_i
 
 # https://moluch.ru/blmcbn/38682/38682.002.png
 def leap_year?(year)
@@ -26,17 +26,14 @@ def leap_year?(year)
 end
 
 def yday(day, month, year)
-  days_in_months = %w[31 28 31 30 31 30 31 31 30 31 30 31]
+  days_in_months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
-  day_number = 0
-  (0..month.to_i - 2).each do |i|
-    day_number += days_in_months[i].to_i
-  end
+  days_in_months[1] = 29 if leap_year?(year)
 
-  if leap_year?(year.to_i)
-    day_number + day.to_i + 1
+  if month > 1
+    day + days_in_months.take(month-1).sum
   else
-    day_number + day.to_i
+    day
   end
 end
 

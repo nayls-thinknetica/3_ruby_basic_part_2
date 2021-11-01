@@ -8,7 +8,7 @@ Encoding.default_internal = Encoding::UTF_8
 
 vowel_letters = %w[а у о ы и э я ю ё е]
 
-letters = Hash.new
+letters = {}
 vowel_letters.each do |letter|
   letters[letter.to_sym] = letter.ord
 end
